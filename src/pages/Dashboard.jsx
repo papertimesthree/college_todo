@@ -36,6 +36,7 @@ const DEADLINES = [
 export default function DashBoard() {
   return (
     <div className="container mx-auto p-4">
+      <img src="/img/icon_checked_circle.png" />
       <ProgressBar />
       <Calendar />
 
