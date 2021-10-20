@@ -36,8 +36,7 @@ const DEADLINES = [
 export default function DashBoard() {
   return (
     <div className="container mx-auto p-4">
-      <img src="/img/icon_checked_circle.png" />
-      <ProgressBar />
+      <Progress />
       <Calendar />
 
       <div className="h-3" />
@@ -50,6 +49,19 @@ export default function DashBoard() {
           <Messages data={DATA} />
         </div>
       </div>
+    </div>
+  );
+}
+
+function Progress() {
+  return (
+    <div className="bg-white container mx-auto p-4 rounded-2xl ">
+      <div className="flex justify-between">
+        <div className="font-mono text-2xl">Achieved</div>
+        <div>1 ToDo</div>
+      </div>
+
+      <ProgressBar progressPercentage={75} />
     </div>
   );
 }

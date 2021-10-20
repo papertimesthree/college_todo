@@ -3,7 +3,14 @@ import "./styles.css";
 import DashBoard from "./pages/Dashboard";
 import MyColleges from "./pages/MyColleges";
 import Calendar from "./pages/Calendar";
-import { FaUser, FaGithub, FaPhoenixFramework } from "react-icons/fa";
+import {
+  FaUser,
+  FaGithub,
+  FaPhoenixFramework,
+  FaArrowLeft,
+  FaGreaterThan,
+  FaChevronLeft
+} from "react-icons/fa";
 import ToDos from "./pages/ToDos";
 import Friends from "./pages/Friends";
 import { useState } from "react";
@@ -53,7 +60,7 @@ export default function App() {
       <BrowserRouter>
         <div className="min-h-screen flex flex-col">
           <TopNav />
-          <div className="flex flex-1">
+          <div className="flex flex-1 bg-gray-200">
             <SideNav />
             <Switch>
               <Route path="/my-colleges" component={MyColleges} />
@@ -62,12 +69,31 @@ export default function App() {
               <Route exact path="/" component={DashBoard} />
             </Switch>
           </div>
+          <BottomNav />
         </div>
       </BrowserRouter>
     </AppContext.Provider>
   );
 }
 
+function BottomNav() {
+  return (
+    <footer className="flex justify-center">
+      {["home", "college-graduation", "work-agenda", "friends", "gear"].map(
+        (m) => (
+          <div key={m} className="mx-3 py-3">
+            <img
+              className="w-6"
+              src={`/img/icon_${m}${m === "home" ? "_active" : ""}.png`}
+            />
+          </div>
+        )
+      )}
+    </footer>
+  );
+}
+
+// deprecated
 function TopNav() {
   return (
     <div className="bg-gray-400 p-4 flex justify-between items-center ">
@@ -81,6 +107,7 @@ function TopNav() {
   );
 }
 
+//deprecated
 function SideNav() {
   return (
     <div className="bg-gray-300 space-y-5 p-4 flex flex-col">

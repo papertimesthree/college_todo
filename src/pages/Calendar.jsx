@@ -2,6 +2,7 @@ import { addMonths, format, getDaysInMonth } from "date-fns";
 import { useContext, useState } from "react";
 import Button from "../components/Button";
 import AppContext from "../utils/app-context";
+import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 
 export default function Calendar() {
   let [d, setD] = useState(new Date());
@@ -26,23 +27,15 @@ export default function Calendar() {
   }
 
   return (
-    <div className="container mx-auto p-4">
-      <div className="flex justify-between m-2">
-        <button
-          className="border rounded bg-gray-300 px-1 hover:bg-blue-100"
-          onClick={prev}
-        >
-          Prev
-        </button>
-        <h1 className="text-center text-2xl" onClick={today}>
+    <div className="container mx-auto p-4 m-4 rounded-2xl bg-white">
+      <div className="flex items-center m-2">
+        <div></div>
+        <FaArrowLeft className="text-xl" onClick={prev} />
+
+        <h1 className="text-center text-2xl mx-2" onClick={today}>
           {format(d, "yyyy MMMM")}
         </h1>
-        <button
-          className="border rounded bg-gray-300 px-1 hover:bg-blue-100"
-          onClick={next}
-        >
-          Next
-        </button>
+        <FaArrowRight className="text-xl" onClick={next} />
       </div>
       <div className="grid grid-cols-7 h-5/6 text-center text-2xl ">
         {"sun,mon,tue,wed,thur,fri,sat".split(",").map((v) => (

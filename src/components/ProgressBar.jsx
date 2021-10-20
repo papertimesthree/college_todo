@@ -1,15 +1,16 @@
-export default function ProgressBar() {
-  let progressPercentage = 75;
+export default function ProgressBar({ progressPercentage }) {
   return (
-    <div class="shadow w-full bg-grey-light mt-2">
+    <div class="shadow w-full bg-grey-light mt-2 rounded-lg overflow-hidden">
       <div className="h-10 w-full bg-gray-300">
         <div
           style={{ width: `${progressPercentage}%` }}
-          className={`h-full ${
-            progressPercentage < 70 ? "bg-red-600" : "bg-green-600"
-          }`}
+          className={`h-full bg-gradient-to-r from-blue-700 to-green-400 rounded-lg flex items-center justify-end text-white font-bold text-xs pr-5`}
         >
-          <div className="text-white text-right ">{`${progressPercentage}%`}</div>
+          <div
+            className={`${
+              progressPercentage < 20 ? "relative left-12 text-black" : ""
+            }`}
+          >{`${progressPercentage}%`}</div>
         </div>
       </div>
     </div>
