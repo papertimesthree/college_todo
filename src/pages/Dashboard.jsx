@@ -44,10 +44,6 @@ export default function DashBoard() {
         <div className="w-0 flex-1">
           <UpcomingDeadlines deadlines={DEADLINES} />
         </div>
-        <div className="w-3" />
-        <div className="w-0 flex-1">
-          <Messages data={DATA} />
-        </div>
       </div>
     </div>
   );
@@ -69,12 +65,19 @@ function Progress() {
 function UpcomingDeadlines({ deadlines }) {
   const sortedDeadlines = deadlines.sort((a, b) => a.deadline - b.deadline);
   return (
-    <div className="bg-gray-200 rounded-2xl p-4 ">
-      <h1 className="text-center text-2xl">Upcoming Deadlines</h1>
+    <div className="bg-white rounded-2xl p-4 ">
+      <h1 className="font-sans text-2xl mb-4">Upcoming Deadlines</h1>
       {sortedDeadlines.map((t, i) => (
-        <div className=" bg-white flex justify-between border rounded p-1 m-1">
-          <span>{format(t.deadline, "yyyy MMMM d")}</span>
-          <div>{t.name}</div>
+        <div className=" bg-white border rounded p-1 m-1">
+          <div className="flex text-sm">
+            <img
+              src="img/icon_exclamation-mark.png"
+              alt="exclamation mark"
+              className=""
+            />
+            <span>{format(t.deadline, "yyyy MMMM d")}</span>
+          </div>
+          <div className="ml-6">{t.name}</div>
         </div>
       ))}
     </div>
