@@ -28,14 +28,20 @@ export default function Calendar() {
 
   return (
     <div className="container mx-auto p-4 m-4 rounded-2xl bg-white">
-      <div className="flex items-center m-2">
-        <div></div>
-        <FaArrowLeft className="text-xl" onClick={prev} />
-
-        <h1 className="text-center text-2xl mx-2" onClick={today}>
-          {format(d, "yyyy MMMM")}
-        </h1>
-        <FaArrowRight className="text-xl" onClick={next} />
+      <div className="flex justify-end items-center">
+        <div className="flex-none w-16"></div>
+        <div className="flex flex-grow justify-center items-center m-2">
+          <FaArrowLeft className="text-xl" onClick={prev} />
+          <h1 className="text-center text-2xl mx-2" onClick={today}>
+            {format(d, "yyyy MMMM")}
+          </h1>
+          <FaArrowRight className="text-xl" onClick={next} />
+        </div>
+        <img
+          src="img/icon_calendar-silhouette.png"
+          className="h-8 w-8 mr-1"
+          alt="calendar"
+        />
       </div>
       <div className="grid grid-cols-7 h-5/6 text-center text-2xl ">
         {"sun,mon,tue,wed,thur,fri,sat".split(",").map((v) => (
@@ -61,6 +67,9 @@ export default function Calendar() {
           />
         ))}
       </div>
+      <div className="flex justify-end pt-4 ">
+        <img src="img/icon_add_circle.png" alt="plus sign" className="w-8" />
+      </div>
     </div>
   );
 }
@@ -75,7 +84,13 @@ function Cell({ date, events, CT }) {
   }
   return (
     <div className="border">
-      {date}
+      <div
+        className={`${
+          date === new Date().getDate() ? "text-blue-500" : "text-black"
+        }`}
+      >
+        {date}
+      </div>
       {events.map((ev) => (
         <Button key={ev.id} className="text-sm" onClick={() => toggle(ev.id)}>
           {ev.done ? "✅" : ""}

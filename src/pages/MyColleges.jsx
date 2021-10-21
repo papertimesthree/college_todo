@@ -51,7 +51,10 @@ const COLLEGES = [
 
 export default function MyColleges() {
   return (
-    <div className="container mx-auto p-4">
+    <div
+      className="container mx-auto p-4"
+      style={{ backgroundColor: "rgb(231, 231, 232)" }}
+    >
       <div className="h-3" />
       <CollegeList />
     </div>
@@ -85,35 +88,48 @@ function CollegeList() {
 
   return (
     <div>
-      <div className="bg-gray-200 rounded-2xl p-4">
-        <h2 className="text-xl">My Colleges</h2>
+      <div className="bg-white rounded-2xl p-4">
+        <h2 className="font-sans text-xl">My Colleges</h2>
+        <input
+          type="search"
+          placeholder="search"
+          className="border m-2 p-2 ml-0.5 rounded"
+          onChange={(event) => setFilter(event.target.value)}
+        />
+        <div>
+          {selected.length} college{selected.length > 1 ? "s" : ""} selected
+          <Button onClick={() => add()}>Add</Button>
+        </div>
         {myCT.map((c, i) => (
           <div key={i} className="bg-blue-200 rounded-2xl p-4">
             {c}
           </div>
         ))}
       </div>
-      <input
-        type="search"
-        placeholder="search"
-        className="border m-2 p-2 rounded"
-        onChange={(event) => setFilter(event.target.value)}
-      />
-      {selected.length} college{selected.length > 1 ? "s" : ""} selected
-      <Button onClick={() => add()}>Add</Button>
-      <div className="bg-gray-200 rounded-2xl p-4 grid grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-8">
+
+      <div className="bg-white rounded-2xl p-4 mt-6 ">
         {filtered.map((c) => (
           <div
             key={c.name}
             className={`${
-              selected.includes(c.name) ? "bg-blue-400" : "bg-blue-200"
-            } rounded p-4 m-1 cursor-pointer`}
+              selected.includes(c.name)
+                ? "font-medium text-lg text-blue-500"
+                : "font-medium text-lg "
+            } rounded p-2 m-1 cursor-pointer`}
             onClick={() => onSelect(c.name)}
           >
-            <div>
-              <img src={c.source} alt="College" height="80" width="80" />
+            <div className="flex justify-between">
+              {c.name}
+              {selected.includes(c.name) ? (
+                <img
+                  className="h-5 "
+                  src="img/icon_checked_circle.png"
+                  alt="checkmark"
+                />
+              ) : (
+                ""
+              )}
             </div>
-            <div>{c.name}</div>
           </div>
         ))}
       </div>

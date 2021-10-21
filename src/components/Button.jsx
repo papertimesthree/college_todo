@@ -3,7 +3,7 @@ export default function Button({
   active = false,
   onClick,
   type = "button",
-  className = ""
+  className = "text-white bg-blue-400 rounded-xl p-1"
 }) {
   return (
     <button
