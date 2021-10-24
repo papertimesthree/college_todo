@@ -1,5 +1,13 @@
+import { useEffect, useState } from "react";
 import Button from "../components/Button";
 import Messages from "../components/Messages";
+import {
+  FaPeopleCarry,
+  FaUser,
+  FaUserAlt,
+  FaUserFriends,
+  FaUserInjured
+} from "react-icons/fa";
 
 const DATA = [
   { id: "asdsd1", from: "Bill", message: "Hello Buddy" },
@@ -37,7 +45,7 @@ const FRIENDS = [
     id: "asdfs5",
     name: "Vicious",
     source:
-      "https://cdn.vox-cdn.com/thumbor/7f8suGJNpPLdxV_RZ4_Xtk_L8nA=/1400x788/filters:format(jpeg)/cdn.vox-cdn.com/uploads/chorus_asset/file/22943072/Cowboy_Bebop_Vicious.jpg"
+      "https://hobbydb-production.s3.amazonaws.com/processed_uploads/subject_photo/subject_photo/image/43791/1538509590-31791-6689/al-lani-memanga-quotes-tumblr-com-there-is-nothing-to-21683517.png"
   },
   {
     id: "asdfs6",
@@ -48,20 +56,77 @@ const FRIENDS = [
 ];
 
 export default function Friends() {
+  let [chatData, setChatData] = useState(DATA);
+  useEffect(() => {
+    if (1 === 1) return;
+    setTimeout(() => {
+      setChatData([
+        ...chatData,
+        { id: "asdsdr7", from: "Joseph", message: "guten tag", highlight: true }
+      ]);
+    }, 3000);
+
+    setTimeout(() => {
+      setChatData([
+        ...chatData,
+        {
+          id: "asdsdr7",
+          from: "Joseph",
+          message: "guten tag",
+          highlight: true
+        },
+        { id: "asdsdr7", from: "Joseph", message: "get out", highlight: true }
+      ]);
+    }, 4000);
+
+    setTimeout(() => {
+      setChatData([
+        ...chatData,
+        {
+          id: "asdsdr7",
+          from: "Joseph",
+          message: "guten tag",
+          highlight: true
+        },
+        { id: "asdsdr7", from: "Joseph", message: "get out", highlight: true },
+        { id: "asdsdr7", from: "Joseph", message: "hey", highlight: true }
+      ]);
+    }, 5000);
+  }, []);
   return (
-    <div className="container mx-auto p-4">
-      <div className="flex">
-        <div className="w-0 flex-1">
-          <Messages data={DATA} />
+    <div className="flex-1 flex flex-col">
+      <TopNav />
+
+      <div className="flex flex-col container p-4 flex-1">
+        <div className="flex-1">
+          <Messages data={chatData} />
         </div>
-        <div className="w-0 flex-1 ml-2">
+        {/* <div className="w-0 flex-1 ml-2">
           <FriendsView />
+        </div> */}
+
+        <div className="flex space-x-2">
+          <input
+            type="text"
+            className="bg-white w-full px-2 py-3 text-lg rounded focus:outline-none"
+          />
+          <button className="d-bg-blue text-white px-2 rounded-xl">SEND</button>
         </div>
       </div>
     </div>
   );
 }
 
+function TopNav() {
+  return (
+    <div className="bg-white flex container p-4 items-center text-2xl">
+      <div className="text-gray-800 font-cute">My Friends</div>
+      <div className="flex-1"></div>
+      <FaUserAlt className="d-text-blue" />
+      <FaUserFriends className="text-blue-400 text-3xl ml-3" />
+    </div>
+  );
+}
 function FriendsView() {
   return (
     <div className="bg-white rounded-2xl p-4">
@@ -78,22 +143,13 @@ function FriendsView() {
           >
             <div className="flex items-center">
               <div
+                className="w-14 h-14 rounded-full border-4"
                 style={{
-                  borderRadius: "50%",
-                  width: "50px",
-                  height: "50px",
-                  display: "inline-block",
-                  position: "relative",
-                  overflow: "hidden"
+                  backgroundImage: `url(${v.source})`,
+                  backgroundSize: "cover",
+                  backgroundPosition: "center"
                 }}
-              >
-                <img
-                  className=""
-                  style={{ width: "auto", height: "100%" }}
-                  src={v.source}
-                  alt="sd"
-                />
-              </div>
+              ></div>
               <div className="ml-2">{v.name}</div>
             </div>
             <img src="img/icon_send_color.png" alt="send_icon" />

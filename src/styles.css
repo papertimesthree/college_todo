@@ -1,2 +1,58 @@
-.App {
+@import url("https://fonts.googleapis.com/css2?family=Fredoka+One&family=Noto+Sans:ital,wght@0,400;0,700;1,400&family=Open+Sans:ital,wght@0,300;1,300&display=swap");
+
+.font-noto {
+  font-family: "noto sans";
+}
+
+.font-cute {
+  font-family: "Fredoka One", cursive;
+}
+
+.d-text-lightlightgray {
+  color: #eeeeee;
+}
+.d-bg-lightlightgray {
+  background-color: #eeeeee;
+}
+
+.d-text-lightgray {
+  color: #e7e7e7;
+}
+.d-bg-lightgray {
+  background-color: #e7e7e7;
+}
+
+.d-text-gray {
+  color: #636a7a;
+}
+.d-bg-gray {
+  background-color: #636a7a;
+}
+
+.d-text-darkgray {
+  color: #2b3448;
+}
+.d-bg-darkgray {
+  background-color: #2b3448;
+}
+
+.d-text-teal {
+  color: #28c4ca;
+}
+.d-bg-teal {
+  background-color: #28c4ca;
+}
+
+.d-text-blue {
+  color: #1d7fe4;
+}
+.d-bg-blue {
+  background-color: #1d7fe4;
+}
+
+.d-text-red {
+  color: #d9366b;
+}
+.d-bg-red {
+  background-color: #d9366b;
 }

@@ -55,13 +55,15 @@ export default function App() {
       deadline: new Date("2021-10-26T06:00:00-08:00")
     }
   ]);
+
   return (
     <AppContext.Provider value={{ todos, setTodos, cals, setCals }}>
       <BrowserRouter>
         <div className="min-h-screen flex flex-col">
-          <TopNav />
           <div className="flex flex-1 bg-gray-200">
-            <SideNav />
+            <div className="hidden md:block bg-white">
+              <BottomNav />
+            </div>
             <Switch>
               <Route path="/my-colleges" component={MyColleges} />
               <Route path="/todos" component={ToDos} />
@@ -69,7 +71,9 @@ export default function App() {
               <Route exact path="/" component={DashBoard} />
             </Switch>
           </div>
-          <BottomNav />
+          <div className="block md:hidden">
+            <BottomNav />
+          </div>
         </div>
       </BrowserRouter>
     </AppContext.Provider>
@@ -77,26 +81,42 @@ export default function App() {
 }
 
 function BottomNav() {
+  let [active, setActive] = useState("Dashboard");
+
+  const NAV = [
+    { name: "Dashboard", image: "home", link: "/" },
+    { name: "My Colleges", image: "college-graduation", link: "/my-colleges" },
+    { name: "To-Dos", image: "work-agenda", link: "/todos" },
+    { name: "Friends", image: "friends", link: "/friends" }
+  ];
   return (
-    <footer className="flex justify-center">
-      {["home", "college-graduation", "work-agenda", "friends", "gear"].map(
-        (m) => (
-          <div key={m} className="mx-3 py-3">
-            <img
-              className="w-6"
-              src={`/img/icon_${m}${m === "home" ? "_active" : ""}.png`}
-            />
-          </div>
-        )
-      )}
+    <footer className="flex justify-center md:flex-col md:bg-white">
+      {NAV.map((m) => (
+        <Link to={m.link} onClick={() => setActive(m.name)}>
+          <NavItem key={m} item={m} active={active === m.name} />
+        </Link>
+      ))}
     </footer>
+  );
+}
+
+function NavItem({ item, active }) {
+  return (
+    <div className="mx-5 py-3">
+      <img
+        className="w-6"
+        src={`/img/icon_${item.image}${active ? "_active" : ""}.png`}
+        alt=""
+      />
+      <div className="hidden md:block md:ml-1">{item.name}</div>
+    </div>
   );
 }
 
 // deprecated
 function TopNav() {
   return (
-    <div className="bg-gray-400 p-4 flex justify-between items-center ">
+    <div className="h-14 bg-gray-400 p-4 flex justify-between items-center ">
       <div>
         <FaPhoenixFramework className="text-3xl text-red-700 transform hover:rotate-45 duration-500" />
       </div>

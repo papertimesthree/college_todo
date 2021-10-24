@@ -30,7 +30,6 @@ export default function ToDos() {
 
   return (
     <div className="container mx-auto p-4">
-      <h1>Test Heading</h1>
       <div>
         <div className="inline-flex border p-1">
           <Button
@@ -45,7 +44,7 @@ export default function ToDos() {
         </div>
 
         <div className="bg-white rounded-2xl p-4">
-          <h2 className="text-2xl mb-4">To Dos</h2>
+          <h2 className="text-2xl mb-4 font-cute d-text-darkgray">To Dos</h2>
           {view === "list" ? (
             <ListView todos={todos} toggleDone={toggleDone} />
           ) : (
@@ -63,29 +62,71 @@ export default function ToDos() {
             backgroundColor: "rgba(0, 0, 0, 0.5)"
           }}
         >
-          <form className="bg-gray-200 rounded-2xl p-2" onSubmit={onSubmit}>
+          <form
+            className="bg-white rounded-2xl m-4 p-4 container font-noto text-gray-700 space-y-5"
+            onSubmit={onSubmit}
+          >
             <div>
               <label className="block mb-1 p-1">Name</label>
-              <input clasName="bg-blue-300" name="name" type="text" />
+              <input
+                className="w-full bg-gray-200 px-3 py-2 rounded-lg shadow-sm focus:outline-none focus:border-blue-500 focus:ring-1 "
+                name="name"
+                type="text"
+              />
             </div>
 
             <div>
               <label className="block mb-1 p-1">Deadline</label>
-              <input name="deadline" type="text" />
+              <div className="flex space-x-2">
+                <div className="p-2 bg-gray-200 rounded-lg flex-1">
+                  <select classname="" id="year" name="year">
+                    <option value="">Year</option>
+                    <option value="2021">2021</option>
+                    <option value="2022">2022</option>
+                    <option value="2023">2023</option>
+                    <option value="2024">2024</option>
+                  </select>
+                </div>
+                <div className="p-2 bg-gray-200 rounded-lg flex-1">
+                  <select classname="" id="cars" name="cars">
+                    <option value="">Month</option>
+                    <option value="2021">2021</option>
+                    <option value="2022">2022</option>
+                    <option value="2023">2023</option>
+                    <option value="2024">2024</option>
+                  </select>
+                </div>
+                <div className="p-2 bg-gray-200 rounded-lg flex-1">
+                  <select classname="" id="cars" name="cars">
+                    <option value="">Day</option>
+                    <option value="2021">2021</option>
+                    <option value="2022">2022</option>
+                    <option value="2023">2023</option>
+                    <option value="2024">2024</option>
+                  </select>
+                </div>
+              </div>
             </div>
 
-            <div className="my-2">
-              <label className="">important</label>
+            <div className="my-2 flex justify-between">
+              <label className="">Important</label>
               <input type="checkbox" name="important" className="ml-2" />
             </div>
 
-            <div>
-              <Button type="submit" active>
+            <div className="flex self-stretch space-x-3">
+              <button
+                type="submit"
+                className="d-bg-blue text-white flex-1 rounded-full py-2 font-cute"
+              >
                 SUBMIT
-              </Button>
-              <Button type="button" onClick={() => setShowForm(false)}>
+              </button>
+              <button
+                type="button"
+                onClick={() => setShowForm(false)}
+                className="bg-gray-300 text-gray-500 flex-1  rounded-full py-2 font-cute"
+              >
                 Cancel
-              </Button>
+              </button>
             </div>
           </form>
         </div>
@@ -121,7 +162,7 @@ function ListView({ todos, toggleDone }) {
                 className="h-6"
               />
             ) : (
-              <FaCircle className="opacity-30 w-6 h-6" />
+              <FaCircle className="text-blue-200 w-6 h-6" />
             )}
           </button>
         </div>

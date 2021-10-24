@@ -52,9 +52,9 @@ export default function DashBoard() {
 function Progress() {
   return (
     <div className="bg-white container mx-auto p-4 rounded-2xl ">
-      <div className="flex justify-between">
-        <div className="font-mono text-2xl">Achieved</div>
-        <div>1 ToDo</div>
+      <div className="flex justify-between items-end font-cute d-text-darkgray">
+        <div className="text-2xl">Achieved</div>
+        <div className="d-text-gray text-sm">5 ToDo</div>
       </div>
 
       <ProgressBar progressPercentage={75} />
@@ -66,20 +66,26 @@ function UpcomingDeadlines({ deadlines }) {
   const sortedDeadlines = deadlines.sort((a, b) => a.deadline - b.deadline);
   return (
     <div className="bg-white rounded-2xl p-4 ">
-      <h1 className="font-sans text-2xl mb-4">Upcoming Deadlines</h1>
-      {sortedDeadlines.map((t, i) => (
-        <div className=" bg-white border rounded p-1 m-1">
-          <div className="flex text-sm">
+      <h1 className="font-sans text-2xl mb-4 font-cute d-text-darkgray">
+        Upcoming Deadlines
+      </h1>
+      <div className="space-y-3">
+        {sortedDeadlines.map((t, i) => (
+          <div className="flex items-start bg-white p-1 m-1">
             <img
               src="img/icon_exclamation-mark.png"
               alt="exclamation mark"
-              className=""
+              className="mt-2 mr-2"
             />
-            <span>{format(t.deadline, "yyyy MMMM d")}</span>
+            <div>
+              <div className="text-sm d-text-gray font-noto">
+                {format(t.deadline, "yyyy MMMM d")}{" "}
+              </div>
+              <div className="font-noto">{t.name}</div>
+            </div>
           </div>
-          <div className="ml-6">{t.name}</div>
-        </div>
-      ))}
+        ))}
+      </div>
     </div>
   );
 }

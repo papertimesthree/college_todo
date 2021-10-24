@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Button from "../components/Button";
+import { FaCross, FaSearch, FaTimes } from "react-icons/fa";
 
 const COLLEGES = [
   {
@@ -83,31 +84,44 @@ function CollegeList() {
 
   function add() {
     let colleges = [...selected];
-    setMyCT([...myCT, colleges]);
+    let myList = [...myCT].concat(colleges);
+    let unique = [...new Set(myList)];
+
+    setMyCT(unique);
   }
 
   return (
     <div>
       <div className="bg-white rounded-2xl p-4">
-        <h2 className="font-sans text-xl">My Colleges</h2>
-        <input
-          type="search"
-          placeholder="search"
-          className="border m-2 p-2 ml-0.5 rounded"
-          onChange={(event) => setFilter(event.target.value)}
-        />
-        <div>
-          {selected.length} college{selected.length > 1 ? "s" : ""} selected
-          <Button onClick={() => add()}>Add</Button>
+        <h2 className="text-2xl d-text-darkgray font-cute">My Colleges</h2>
+        <div className="bg-gray-200 text-gray-600 m-2 p-2 ml-0.5 rounded text-xl flex items-center space-x-3">
+          <FaSearch />
+          <input
+            type="search"
+            placeholder="Johns Hopkins University"
+            onChange={(event) => setFilter(event.target.value)}
+            className="bg-gray-200 text-gray-600 flex-1 focus:outline-none"
+          />
+          <FaTimes onClick={() => {}} />
+        </div>
+        <div className="flex justify-end items-center font-cute text-gray-500 space-x-2">
+          <span className="d-text-blue">{selected.length}</span>
+          <div>college{selected.length > 1 ? "s" : ""} selected</div>
+          <button
+            className="d-bg-blue text-white px-4 rounded-2xl py-1 font-cute"
+            onClick={() => add()}
+          >
+            Save
+          </button>
         </div>
         {myCT.map((c, i) => (
-          <div key={i} className="bg-blue-200 rounded-2xl p-4">
+          <div key={i} className="font-cute  p-4">
             {c}
           </div>
         ))}
       </div>
 
-      <div className="bg-white rounded-2xl p-4 mt-6 ">
+      <div className="bg-white rounded-2xl p-4 mt-6 font-cute text-gray-600">
         {filtered.map((c) => (
           <div
             key={c.name}
