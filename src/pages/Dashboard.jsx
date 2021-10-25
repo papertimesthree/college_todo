@@ -2,6 +2,8 @@ import Messages from "../components/Messages";
 import ProgressBar from "../components/ProgressBar";
 import { format } from "date-fns";
 import Calendar from "./Calendar";
+import AppContext from "../utils/app-context";
+import { useContext } from "react";
 
 const DATA = [
   { id: "asdsd1", from: "Bill", message: "Hello Buddy" },
@@ -34,8 +36,16 @@ const DEADLINES = [
 ];
 
 export default function DashBoard() {
+  let { user } = useContext(AppContext);
   return (
     <div className="container mx-auto p-4">
+      <div>
+        <img
+          src={user?.photoURL}
+          alt=""
+          className="w-10 h-10 rounded-full mb-3 "
+        />
+      </div>
       <Progress />
       <Calendar />
 

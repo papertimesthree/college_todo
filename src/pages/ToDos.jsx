@@ -20,6 +20,7 @@ export default function ToDos() {
     };
     event.target.reset();
     setTodos([...todos, entry]);
+    setShowForm(false);
   }
 
   function toggleDone(i) {
@@ -65,6 +66,7 @@ export default function ToDos() {
           <form
             className="bg-white rounded-2xl m-4 p-4 container font-noto text-gray-700 space-y-5"
             onSubmit={onSubmit}
+            autocomplete="off"
           >
             <div>
               <label className="block mb-1 p-1">Name</label>
@@ -72,43 +74,24 @@ export default function ToDos() {
                 className="w-full bg-gray-200 px-3 py-2 rounded-lg shadow-sm focus:outline-none focus:border-blue-500 focus:ring-1 "
                 name="name"
                 type="text"
+                required
               />
             </div>
 
             <div>
               <label className="block mb-1 p-1">Deadline</label>
               <div className="flex space-x-2">
-                <div className="p-2 bg-gray-200 rounded-lg flex-1">
-                  <select classname="" id="year" name="year">
-                    <option value="">Year</option>
-                    <option value="2021">2021</option>
-                    <option value="2022">2022</option>
-                    <option value="2023">2023</option>
-                    <option value="2024">2024</option>
-                  </select>
-                </div>
-                <div className="p-2 bg-gray-200 rounded-lg flex-1">
-                  <select classname="" id="cars" name="cars">
-                    <option value="">Month</option>
-                    <option value="2021">2021</option>
-                    <option value="2022">2022</option>
-                    <option value="2023">2023</option>
-                    <option value="2024">2024</option>
-                  </select>
-                </div>
-                <div className="p-2 bg-gray-200 rounded-lg flex-1">
-                  <select classname="" id="cars" name="cars">
-                    <option value="">Day</option>
-                    <option value="2021">2021</option>
-                    <option value="2022">2022</option>
-                    <option value="2023">2023</option>
-                    <option value="2024">2024</option>
-                  </select>
-                </div>
+                <input
+                  className="w-full bg-gray-200 px-3 py-2 rounded-lg shadow-sm focus:outline-none focus:border-blue-500 focus:ring-1 "
+                  name="deadline"
+                  type="text"
+                  placeholder="2021-10-12"
+                  required
+                />
               </div>
             </div>
 
-            <div className="my-2 flex justify-between">
+            <div className="my-2 flex justify-between items-center">
               <label className="">Important</label>
               <input type="checkbox" name="important" className="ml-2" />
             </div>
@@ -152,7 +135,7 @@ function ListView({ todos, toggleDone }) {
   return (
     <div>
       {todos.map((t, i) => (
-        <div className="flex justify-between  p-1 m-1">
+        <div className="flex justify-between  p-1 m-1" key={i}>
           <span>{t.name}</span>
           <button onClick={() => toggleDone(i)}>
             {t.done ? (

@@ -1,6 +1,5 @@
 import { useState } from "react";
-import Button from "../components/Button";
-import { FaCross, FaSearch, FaTimes } from "react-icons/fa";
+import { FaSearch } from "react-icons/fa";
 
 const COLLEGES = [
   {
@@ -86,7 +85,7 @@ function CollegeList() {
     let colleges = [...selected];
     let myList = [...myCT].concat(colleges);
     let unique = [...new Set(myList)];
-
+    setSelected([]);
     setMyCT(unique);
   }
 
@@ -102,7 +101,6 @@ function CollegeList() {
             onChange={(event) => setFilter(event.target.value)}
             className="bg-gray-200 text-gray-600 flex-1 focus:outline-none"
           />
-          <FaTimes onClick={() => {}} />
         </div>
         <div className="flex justify-end items-center font-cute text-gray-500 space-x-2">
           <span className="d-text-blue">{selected.length}</span>

@@ -1,6 +1,6 @@
 export default function ProgressBar({ progressPercentage }) {
   return (
-    <div class="shadow w-full bg-grey-light mt-2 rounded-lg overflow-hidden">
+    <div className="shadow w-full bg-grey-light mt-2 rounded-lg overflow-hidden">
       <div className="h-10 w-full bg-gray-300">
         <div
           style={{ width: `${progressPercentage}%` }}

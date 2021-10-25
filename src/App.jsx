@@ -2,19 +2,15 @@ import { BrowserRouter, Link, Switch, Route } from "react-router-dom";
 import "./styles.css";
 import DashBoard from "./pages/Dashboard";
 import MyColleges from "./pages/MyColleges";
-import Calendar from "./pages/Calendar";
-import {
-  FaUser,
-  FaGithub,
-  FaPhoenixFramework,
-  FaArrowLeft,
-  FaGreaterThan,
-  FaChevronLeft
-} from "react-icons/fa";
+import { FaUser, FaPhoenixFramework } from "react-icons/fa";
 import ToDos from "./pages/ToDos";
 import Friends from "./pages/Friends";
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
+
 import AppContext from "./utils/app-context";
+import Messages from "./components/Messages";
+import { auth } from "./utils/fb";
+import firebase from "firebase";
 
 export default function App() {
   let [todos, setTodos] = useState([
@@ -56,22 +52,33 @@ export default function App() {
     }
   ]);
 
+  let [user, setUser] = useState(undefined);
+
+  useEffect(() => {
+    auth.onAuthStateChanged((user) => {
+      setUser(user);
+    });
+  }, []);
+
   return (
-    <AppContext.Provider value={{ todos, setTodos, cals, setCals }}>
+    <AppContext.Provider
+      value={{ todos, setTodos, cals, setCals, user, setUser }}
+    >
       <BrowserRouter>
         <div className="min-h-screen flex flex-col">
           <div className="flex flex-1 bg-gray-200">
-            <div className="hidden md:block bg-white">
+            <div className="hidden xl:block bg-white">
               <BottomNav />
             </div>
             <Switch>
               <Route path="/my-colleges" component={MyColleges} />
               <Route path="/todos" component={ToDos} />
               <Route path="/friends" component={Friends} />
+              <Route path="/messages" component={Messages} />
               <Route exact path="/" component={DashBoard} />
             </Switch>
           </div>
-          <div className="block md:hidden">
+          <div className="block xl:hidden">
             <BottomNav />
           </div>
         </div>
@@ -82,6 +89,15 @@ export default function App() {
 
 function BottomNav() {
   let [active, setActive] = useState("Dashboard");
+  let { user } = useContext(AppContext);
+
+  function signin() {
+    auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
+  }
+
+  function signout() {
+    auth.signOut();
+  }
 
   const NAV = [
     { name: "Dashboard", image: "home", link: "/" },
@@ -90,12 +106,20 @@ function BottomNav() {
     { name: "Friends", image: "friends", link: "/friends" }
   ];
   return (
-    <footer className="flex justify-center md:flex-col md:bg-white">
+    <footer className="flex justify-center items-center xl:items-start xl:flex-col xl:bg-white">
       {NAV.map((m) => (
-        <Link to={m.link} onClick={() => setActive(m.name)}>
-          <NavItem key={m} item={m} active={active === m.name} />
+        <Link to={m.link} onClick={() => setActive(m.name)} key={m.name}>
+          <NavItem item={m} active={active === m.name} />
         </Link>
       ))}
+      <div className="mx-5 py-3">
+        <button
+          className="d-bg-blue text-white px-4 py-1 rounded"
+          onClick={user ? signout : signin}
+        >
+          {user ? <div>Sign Out</div> : "Sign In With Google"}
+        </button>
+      </div>
     </footer>
   );
 }
@@ -108,7 +132,7 @@ function NavItem({ item, active }) {
         src={`/img/icon_${item.image}${active ? "_active" : ""}.png`}
         alt=""
       />
-      <div className="hidden md:block md:ml-1">{item.name}</div>
+      <div className="hidden xl:block xl:ml-1">{item.name}</div>
     </div>
   );
 }
