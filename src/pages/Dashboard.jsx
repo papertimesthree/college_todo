@@ -43,7 +43,7 @@ export default function DashBoard() {
         <img
           src={user?.photoURL}
           alt=""
-          className="w-10 h-10 rounded-full mb-3 "
+          className="w-10 h-10 rounded-full mb-3   "
         />
       </div>
       <Progress />
