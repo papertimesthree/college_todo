@@ -52,7 +52,7 @@ const FRIENDS = [
 export default function Friends() {
   return (
     <div className="flex-1 flex flex-col">
-      <TopNav />
+      <TopNav title={"Friends"} />
       <div className="container mx-auto p-4">
         <div className="flex">
           <div className="w-0 flex-1 ml-2">

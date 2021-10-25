@@ -5,13 +5,6 @@ import TopNav from "../components/FriendsNav";
 import AppContext from "../utils/app-context";
 import { db } from "../utils/fb";
 
-const DATA = [
-  { id: "asdsd1", from: "Bill", message: "Hello Buddy" },
-  { id: "asdsd2", from: "Mary", message: "What's up?" },
-  { id: "asdsd3", from: "William", message: "hola" },
-  { id: "asdsdr4", from: "Joseph", message: "guten tag" }
-];
-
 export default function Messages() {
   let [chatData, setChatData] = useState([]);
   let { user } = useContext(AppContext);
@@ -47,9 +40,8 @@ export default function Messages() {
 
   return (
     <div className="flex-1">
-      <TopNav />
+      <TopNav title={"Messages"} />
       <div className="container mx-auto bg-gray-200 rounded-2xl p-4">
-        <h1 className="text-center text-2xl">Messages</h1>
         <div className="flex flex-col-reverse">
           {chatData.map((v) => (
             <div key={v.id} className="flex space-x-4 my-5">
@@ -84,8 +76,8 @@ export default function Messages() {
 function ChatBox({ onSubmit }) {
   let { user } = useContext(AppContext);
   return (
-    <div className="flex bg-white rounded-xl p-2 mb-2">
-      <form onSubmit={onSubmit}>
+    <div className="bg-white rounded-xl p-2 mb-2">
+      <form className="flex" onSubmit={onSubmit}>
         <input
           type="text"
           placeholder={

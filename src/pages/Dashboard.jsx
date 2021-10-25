@@ -39,12 +39,13 @@ export default function DashBoard() {
   let { user } = useContext(AppContext);
   return (
     <div className="container mx-auto p-4">
-      <div>
+      <div className="flex items-center space-x-4">
         <img
           src={user?.photoURL}
           alt=""
           className="w-10 h-10 rounded-full mb-3   "
         />
+        <div className="font-cute text-2xl">Welcome</div>
       </div>
       <Progress />
       <Calendar />
