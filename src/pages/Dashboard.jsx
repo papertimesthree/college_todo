@@ -30,8 +30,8 @@ const DEADLINES = [
   },
   {
     id: "asdsdr4",
-    name: "Sleep",
-    deadline: new Date("2021-09-14T06:00:00-08:00")
+    name: "Georgia Tech",
+    deadline: new Date("2021-11-01T06:00:00-08:00")
   }
 ];
 

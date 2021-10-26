@@ -49,6 +49,16 @@ export default function App() {
       id: 6,
       name: "UCI",
       deadline: new Date("2021-10-26T06:00:00-08:00")
+    },
+    {
+      id: 7,
+      name: "GTech",
+      deadline: new Date("2021-11-01T06:00:00-08:00")
+    },
+    {
+      id: 8,
+      name: "HMC",
+      deadline: new Date("2021-11-15T06:00:00-08:00")
     }
   ]);
 
