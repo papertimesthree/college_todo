@@ -95,7 +95,9 @@ function Cell({ date, events, CT }) {
     <div className="flex flex-col items-center">
       <div
         className={`${
-          date === new Date().getDate() ? "text-blue-500" : "d-text-gray"
+          date === new Date().getDate()
+            ? "text-blue-500 font-bold"
+            : "d-text-gray"
         }
         text-base font-noto
         `}
