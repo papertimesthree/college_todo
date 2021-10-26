@@ -85,6 +85,7 @@ function ChatBox({ onSubmit }) {
           }
           name="message"
           className="bg-white w-full px-2 py-3 text-lg  focus:outline-none"
+          autoComplete="off"
           disabled={!user}
         />
         <button
